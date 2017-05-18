@@ -18,10 +18,12 @@
         <TextView
             android:layout_width="45dp"
             android:layout_height="wrap_content"
-            android:text="Name :     "/>
+            android:text="Name :     "
+            />
         <EditText
             android:layout_width="300dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/nameEditText"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,14 +36,21 @@
         <EditText
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:id="@+id/meassageEditText"/>
+            android:id="@+id/messageEditText"
+            />
     </LinearLayout>
+    <DatePicker
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:datePickerMode="spinner"
+        android:id="@+id/datepicker"></DatePicker>
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="Save"
+        android:onClick="savetoDatabase"
         android:clickable="true"
 
         />

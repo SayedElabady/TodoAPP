@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null){
+            Intent intent = new Intent(MainActivity.this, toDoActivity.class);
+            startActivity(intent);
+        }
 
     }
     void createAccount(String email , String password){
