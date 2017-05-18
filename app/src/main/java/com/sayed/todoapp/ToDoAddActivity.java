@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-public class toDoEditActivity extends AppCompatActivity {
+public class ToDoAddActivity extends AppCompatActivity {
     EditText name , message ;
     DatePicker datepicker;
     @Override
@@ -29,7 +29,6 @@ public class toDoEditActivity extends AppCompatActivity {
     public void savetoDatabase(View view) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         String key = database.getReference("todoList").push().getKey();
-
         String nameStr = name.getText().toString();
         String messageStr = message.getText().toString();
         Date date = new Date();
@@ -40,6 +39,13 @@ public class toDoEditActivity extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy HH:MM");
 
         String dateStr = format.format(date);
+        database.getReference("todoList").child("name").push().setValue(nameStr);
+        database.getReference("todoList").child("message").push().setValue(messageStr);
+        database.getReference("todoList").child("date").push().setValue(dateStr);
+
+
+
+
 
         todo toDo = new todo();
         toDo.setDate(dateStr);
@@ -47,7 +53,7 @@ public class toDoEditActivity extends AppCompatActivity {
         toDo.setMessage(messageStr);
 
         HashMap<String , Object> toDoChild = new HashMap<>();
-        toDoChild.put(key , toDo.toFirebaseObject());
+        toDoChild.put(key , toDo);
         database.getReference("todoList").updateChildren(toDoChild, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

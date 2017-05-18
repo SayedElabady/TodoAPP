@@ -37,19 +37,18 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Log.d(TAG, "createUserWithEmail:success");
+
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Toast.makeText(RegisterActivity.this, "User Registered sa7 .. Mabrouk yasta!",
                                         Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegisterActivity.this , MainActivity.class);
                                 startActivity(intent);
                             } else {
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+
                                 Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
                             }
 
-                            // ...
                         }
                     });
         }

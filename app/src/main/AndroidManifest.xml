@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".toDoActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".toDoEditActivity"></activity>
+        <activity android:name=".ToDoAddActivity"></activity>
     </application>
 
 </manifest>
