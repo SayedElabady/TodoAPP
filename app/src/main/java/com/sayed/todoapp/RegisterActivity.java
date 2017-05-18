@@ -15,17 +15,21 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class RegisterActivity extends AppCompatActivity {
-    private static final String TAG = "MyActivity";
-    private EditText email , firstPassword , secondPassword ;
+
+
     private FirebaseAuth mAuth;
+    @BindView(R.id.emailToRegister) EditText email;
+    @BindView(R.id.firstPassword) EditText firstPassword;
+    @BindView(R.id.secondPassword) EditText secondPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        email = (EditText) findViewById(R.id.emailToRegister);
-        firstPassword = (EditText) findViewById(R.id.firstPassword);
-        secondPassword = (EditText) findViewById(R.id.secondPassword);
+            ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
     }
     public void completeRegister(View view){

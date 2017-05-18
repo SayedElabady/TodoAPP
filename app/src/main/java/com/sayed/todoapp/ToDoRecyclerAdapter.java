@@ -10,11 +10,17 @@ import java.util.ArrayList;
 
 
     public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapter.SimpleItemViewHolder> {
-    ArrayList<todo> todoList;
+    ArrayList<ToDo> todoList;
         public ToDoRecyclerAdapter(){
             todoList = new ArrayList<>();
         }
 
+        void setList(ArrayList<ToDo> List){
+            todoList = List;
+        }
+        ArrayList<ToDo> getList(){
+            return todoList;
+        }
         @Override
         public int getItemCount() {
             return todoList.size();
@@ -30,7 +36,7 @@ import java.util.ArrayList;
     @Override
     public void onBindViewHolder(SimpleItemViewHolder holder, int position) {
         holder.position = position;
-        todo todo = todoList.get(position);
+        ToDo todo = todoList.get(position);
         (holder).title.setText(todo.getName());
     }
 

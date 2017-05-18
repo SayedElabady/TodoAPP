@@ -18,17 +18,20 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import butterknife.BindView;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyActivity";
-    private EditText email , password ;
+
     private FirebaseAuth mAuth;
+    @BindView(R.id.emailEditText) EditText email;
+    @BindView(R.id.passwordEditText) EditText password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-        email = (EditText) findViewById(R.id.emailEditText);
-        password = (EditText) findViewById(R.id.passwordEditText);
+
     }
 
    public void LogIn(View view){

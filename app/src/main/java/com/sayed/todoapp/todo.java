@@ -6,13 +6,13 @@ import java.util.HashMap;
 /**
  * Created by Sayed on 5/18/2017.
  */
-public class todo implements Serializable {
+public class ToDo implements Serializable {
 
     private String name;
     private String message;
     private String date;
 
-    public todo() {
+    public ToDo() {
 
     }
     public String getDate() {

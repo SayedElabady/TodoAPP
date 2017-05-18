@@ -39,15 +39,15 @@ public class ToDoAddActivity extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy HH:MM");
 
         String dateStr = format.format(date);
-        database.getReference("todoList").child("name").push().setValue(nameStr);
-        database.getReference("todoList").child("message").push().setValue(messageStr);
-        database.getReference("todoList").child("date").push().setValue(dateStr);
+        //database.getReference("todoList").child("name").push().setValue(nameStr);
+       // database.getReference("todoList").child("message").push().setValue(messageStr);
+       // database.getReference("todoList").child("date").push().setValue(dateStr);
 
 
 
 
 
-        todo toDo = new todo();
+        ToDo toDo = new ToDo();
         toDo.setDate(dateStr);
         toDo.setName(nameStr);
         toDo.setMessage(messageStr);
