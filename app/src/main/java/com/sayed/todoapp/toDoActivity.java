@@ -31,7 +31,7 @@ public class ToDoActivity extends AppCompatActivity implements TodoLoadListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-      //  ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
         //bind the adapter to the recyclerview
         LinearLayoutManager llm = new LinearLayoutManager(this);

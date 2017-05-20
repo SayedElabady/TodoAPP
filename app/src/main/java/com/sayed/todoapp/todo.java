@@ -11,6 +11,7 @@ public class ToDo implements Serializable {
     private String name;
     private String message;
     private String date;
+    private String uid;
 
     public ToDo() {
 
@@ -18,9 +19,16 @@ public class ToDo implements Serializable {
     public String getDate() {
         return date;
     }
+    public String getUid() {
+        return uid;
+    }
+
 
     public void setDate(String date) {
         this.date = date;
+    }
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getName() {

@@ -34,9 +34,7 @@ public class ToDoAddActivity extends AppCompatActivity{
     }
 
     public void savetoDatabase(View view) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        String key = database.getReference("todoList").push().getKey();
-        String nameStr = name.getText().toString();
+        FirebaseDatabase database = FirebaseDatabase.getInstance(); String nameStr = name.getText().toString();
         String messageStr = message.getText().toString();
         Date date = new Date();
         date.setMonth(datepicker.getMonth());
@@ -59,8 +57,10 @@ public class ToDoAddActivity extends AppCompatActivity{
         toDo.setName(nameStr);
         toDo.setMessage(messageStr);
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        HashMap<String , Object> toDoChild = new HashMap<>();
-        toDoChild.put(key , toDo);
+
+        String key = database.getReference("todoList").child(uid).push().getKey();
+       toDo.setUid(key);
+
         database.getReference("todoList").child(uid).push().setValue(toDo);
         Intent intent = new Intent(ToDoAddActivity.this , ToDoActivity.class);
         startActivity(intent);
