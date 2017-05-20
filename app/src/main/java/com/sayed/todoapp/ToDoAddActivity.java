@@ -1,29 +1,36 @@
 package com.sayed.todoapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class ToDoAddActivity extends AppCompatActivity {
-    EditText name , message ;
-    DatePicker datepicker;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class ToDoAddActivity extends AppCompatActivity{
+    @BindView(R.id.datepicker) DatePicker datepicker;
+    @BindView(R.id.messageEditText) EditText message;
+    @BindView(R.id.nameEditText) EditText name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do_edit);
-        name = (EditText) findViewById(R.id.nameEditText);
-        message = (EditText) findViewById(R.id.messageEditText);
-        datepicker = (DatePicker) findViewById(R.id.datepicker);
+        ButterKnife.bind(this);
+
     }
 
     public void savetoDatabase(View view) {
@@ -40,8 +47,8 @@ public class ToDoAddActivity extends AppCompatActivity {
 
         String dateStr = format.format(date);
         //database.getReference("todoList").child("name").push().setValue(nameStr);
-       // database.getReference("todoList").child("message").push().setValue(messageStr);
-       // database.getReference("todoList").child("date").push().setValue(dateStr);
+        // database.getReference("todoList").child("message").push().setValue(messageStr);
+        // database.getReference("todoList").child("date").push().setValue(dateStr);
 
 
 
@@ -51,18 +58,18 @@ public class ToDoAddActivity extends AppCompatActivity {
         toDo.setDate(dateStr);
         toDo.setName(nameStr);
         toDo.setMessage(messageStr);
-
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         HashMap<String , Object> toDoChild = new HashMap<>();
         toDoChild.put(key , toDo);
-        database.getReference("todoList").updateChildren(toDoChild, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                if (databaseError == null) {
-                    finish();
-                }
-            }
-        });
+        database.getReference("todoList").child(uid).push().setValue(toDo);
+        Intent intent = new Intent(ToDoAddActivity.this , ToDoActivity.class);
+        startActivity(intent);
+
 
 
     }
+
+
+
+
 }

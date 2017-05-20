@@ -8,7 +8,8 @@ import java.util.List;
  */
 
 public interface TodoLoadListener {
-    ArrayList<ToDo> todoList = new ArrayList<>() ;
+
 
     void onDataLoaded(ArrayList<ToDo> dataList);
+
 }
