@@ -40,10 +40,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Signed In Successfully.. 3eesh ;) .",
-                                    Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
-                            startActivity(intent);
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                            if(!currentUser.isEmailVerified()) {
+                                Toast.makeText(MainActivity.this, "Verify Your Email First!",
+                                        Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(MainActivity.this, "Signed In Successfully.. 3eesh ;) .",
+                                        Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
+                                startActivity(intent);
+                            }
                         } else {
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
@@ -58,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser!=null){
+        if(currentUser!=null && currentUser.isEmailVerified()){
             Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
-          //startActivity(intent);
+          startActivity(intent);
         }
 
     }

@@ -61,7 +61,7 @@ public class ToDoAddActivity extends AppCompatActivity{
         String key = database.getReference("todoList").child(uid).push().getKey();
        toDo.setUid(key);
 
-        database.getReference("todoList").child(uid).push().setValue(toDo);
+        database.getReference("todoList").child(uid).child(key).setValue(toDo);
         Intent intent = new Intent(ToDoAddActivity.this , ToDoActivity.class);
         startActivity(intent);
 

@@ -66,7 +66,7 @@ import java.util.ArrayList;
                                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                 DatabaseReference database = FirebaseDatabase.getInstance().getReference("todoList").child(uid);
 
-                                database.child(item.getName()).removeValue();
+                                database.child(item.getUid()).removeValue();
                                 //database.child(item.getDate()).removeValue();
                                // database.child(item.getDate()).removeValue();
                             }

@@ -5,7 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -41,7 +46,22 @@ public class ToDoActivity extends AppCompatActivity implements TodoLoadListener{
         // getting the instance of the db
         toDoDataBase =  ToDoDataBase.getInstance();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);//Menu Resource, Menu
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.item1){
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(ToDoActivity.this , MainActivity.class);
+            startActivity(intent);
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
     // floating action button handler .. " get into the add activity "
     @OnClick(R.id.fab)
     public void enterAddActivity(View view) {
