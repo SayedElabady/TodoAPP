@@ -43,7 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
 
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                user.sendEmailVerification();
+                                    user.sendEmailVerification();
+
                                 Toast.makeText(RegisterActivity.this, "User Registered sa7 .. Mabrouk yasta!",
                                         Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegisterActivity.this , MainActivity.class);
