@@ -1,7 +1,8 @@
-package com.sayed.todoapp;
+package listener;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import model.ToDo;
 
 /**
  * Created by Sayed on 5/19/2017.

@@ -1,7 +1,6 @@
-package com.sayed.todoapp;
+package adapter;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -9,23 +8,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sayed.todoapp.R;
+import model.ToDo;
 
 import java.util.ArrayList;
 
+import controller.ToDoActivity;
 
-    public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapter.SimpleItemViewHolder> {
+
+public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapter.SimpleItemViewHolder> {
     ArrayList<ToDo> todoList;
         RecyclerView recyclerView;
         public ToDoRecyclerAdapter(){
             todoList = new ArrayList<>();
         }
 
-        void setList(ArrayList<ToDo> List){
+        public void setList(ArrayList<ToDo> List){
             todoList = List;
         }
         ArrayList<ToDo> getList(){

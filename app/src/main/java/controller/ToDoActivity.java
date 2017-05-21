@@ -1,4 +1,4 @@
-package com.sayed.todoapp;
+package controller;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,17 +8,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.sayed.todoapp.R;
+import model.ToDo;
+import adapter.ToDoRecyclerAdapter;
+import listener.TodoLoadListener;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import module.ToDoDataBase;
 
-public class ToDoActivity extends AppCompatActivity implements TodoLoadListener{
+public class ToDoActivity extends AppCompatActivity implements TodoLoadListener {
     ToDoRecyclerAdapter adapter;
     ToDoDataBase toDoDataBase;
     public static RecyclerView recyclerView;

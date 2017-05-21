@@ -1,4 +1,4 @@
-package com.sayed.todoapp;
+package model;
 
 import java.io.Serializable;
 import java.util.HashMap;
