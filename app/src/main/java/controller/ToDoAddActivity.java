@@ -42,13 +42,6 @@ public class ToDoAddActivity extends AppCompatActivity{
         SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy HH:MM");
 
         String dateStr = format.format(date);
-        //database.getReference("todoList").child("name").push().setValue(nameStr);
-        // database.getReference("todoList").child("message").push().setValue(messageStr);
-        // database.getReference("todoList").child("date").push().setValue(dateStr);
-
-
-
-
 
         ToDo toDo = new ToDo();
         toDo.setDate(dateStr);
@@ -57,7 +50,7 @@ public class ToDoAddActivity extends AppCompatActivity{
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         String key = database.getReference("todoList").child(uid).push().getKey();
-       toDo.setUid(key);
+        toDo.setUid(key);
 
         database.getReference("todoList").child(uid).child(key).setValue(toDo);
         Intent intent = new Intent(ToDoAddActivity.this , ToDoActivity.class);

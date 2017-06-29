@@ -9,6 +9,6 @@ import com.google.firebase.auth.FirebaseUser;
 public interface TodoRegisterListener {
 
 
-   void onSucess();
+   void onSuccess();
     void onFailure();
 }

@@ -51,7 +51,7 @@
         <EditText
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:id="@+id/secondPassword"
+            android:id="@+id/repeatedPassword"
             android:inputType="textPassword"/>
     </LinearLayout>
     <Button

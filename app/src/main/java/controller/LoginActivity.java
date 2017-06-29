@@ -18,8 +18,8 @@ import com.sayed.todoapp.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MyActivity";
+public class LoginActivity extends AppCompatActivity {
+
 
     private FirebaseAuth mAuth;
     @BindView(R.id.emailEditText) EditText email;
@@ -41,15 +41,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser currentUser = mAuth.getCurrentUser();
 
-                                Toast.makeText(MainActivity.this, "Signed In Successfully.. 3eesh ;) .",
+
+                                Toast.makeText(LoginActivity.this, "Signed In Successfully.. 3eesh ;) .",
                                         Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, ToDoActivity.class);
                                 startActivity(intent);
 
                         } else {
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null && currentUser.isEmailVerified()){
-            Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
+            Intent intent = new Intent(LoginActivity.this, ToDoActivity.class);
           startActivity(intent);
         }
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void Register(View view) {
-        Intent intent = new Intent(MainActivity.this , RegisterActivity.class);
+        Intent intent = new Intent(LoginActivity.this , RegisterActivity.class);
         startActivity(intent);
     }
 }

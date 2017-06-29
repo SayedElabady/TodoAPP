@@ -33,7 +33,7 @@ public class ToDoUserRegister {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                listener.onSucess();
+                                listener.onSuccess();
 
                             } else {
                                 listener.onFailure();

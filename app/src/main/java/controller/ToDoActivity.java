@@ -8,9 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.sayed.todoapp.R;
+
+import butterknife.BindView;
 import model.ToDo;
 import adapter.ToDoRecyclerAdapter;
 import listener.TodoLoadListener;
@@ -24,10 +27,8 @@ import module.ToDoDataBase;
 public class ToDoActivity extends AppCompatActivity implements TodoLoadListener {
     ToDoRecyclerAdapter adapter;
     ToDoDataBase toDoDataBase;
-    public static RecyclerView recyclerView;
 
-   // @BindView(R.id.recyclerView) RecyclerView recyclerView;
-
+    @BindView(R.id.recyclerView) RecyclerView recyclerView;
     @Override
     protected void onStart() {
         super.onStart();
@@ -38,7 +39,7 @@ public class ToDoActivity extends AppCompatActivity implements TodoLoadListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
         ButterKnife.bind(this);
 
         //bind the adapter to the recyclerview
@@ -59,7 +60,7 @@ public class ToDoActivity extends AppCompatActivity implements TodoLoadListener 
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.item1){
             FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(ToDoActivity.this , MainActivity.class);
+            Intent intent = new Intent(ToDoActivity.this , LoginActivity.class);
             startActivity(intent);
         }
 
@@ -76,7 +77,6 @@ public class ToDoActivity extends AppCompatActivity implements TodoLoadListener 
     @Override
     public void onDataLoaded(ArrayList<ToDo> dataList) {
         adapter.setList(dataList);
-        adapter.notifyDataSetChanged();
     }
 
 

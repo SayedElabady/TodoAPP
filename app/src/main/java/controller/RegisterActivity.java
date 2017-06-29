@@ -1,16 +1,12 @@
 package controller;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.sayed.todoapp.R;
@@ -28,8 +24,8 @@ public class RegisterActivity extends AppCompatActivity implements TodoRegisterL
     private FirebaseAuth mAuth;
     @BindView(R.id.emailToRegister) EditText email;
     @BindView(R.id.firstPassword) EditText firstPassword;
-    @BindView(R.id.secondPassword) EditText secondPassword;
-    String email1 , Password1 , Password2;
+    @BindView(R.id.repeatedPassword) EditText repeatedPassword;
+    String email1 , Password1 ;
 
     @Override
     protected void onStart() {
@@ -48,20 +44,19 @@ public class RegisterActivity extends AppCompatActivity implements TodoRegisterL
     public void completeRegister(View view){
         email1 = email.getText().toString() ;
         Password1 = firstPassword.getText().toString();
-      //  Password2 = secondPassword.getText().toString();
         toDoUserRegister.RegisteringUserIntoDB(email1 , Password1 ,todoRegisterListener, this);
     }
 
 
 
     @Override
-    public void onSucess() {
+    public void onSuccess() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         user.sendEmailVerification();
 
         Toast.makeText(RegisterActivity.this, "User Registered..Verifty your email to be able to login",
                 Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(RegisterActivity.this , MainActivity.class);
+        Intent intent = new Intent(RegisterActivity.this , LoginActivity.class);
         startActivity(intent);
     }
 

@@ -17,12 +17,12 @@ import model.ToDo;
 
 import java.util.ArrayList;
 
-import controller.ToDoActivity;
+
 
 
 public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapter.SimpleItemViewHolder> {
     ArrayList<ToDo> todoList;
-        RecyclerView recyclerView;
+
         public ToDoRecyclerAdapter(){
             todoList = new ArrayList<>();
         }
@@ -46,15 +46,15 @@ public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapte
         }
 
     @Override
-    public void onBindViewHolder(SimpleItemViewHolder holder, int position) {
-        holder.position = position;
-        ToDo todo = todoList.get(position);
+    public void onBindViewHolder(SimpleItemViewHolder holder, final int position) {
+        holder.setPosition(position);
+        final ToDo todo = todoList.get(position);
         (holder).title.setText(todo.getName());
         holder.v.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                int itemPosition = ToDoActivity.recyclerView.getChildLayoutPosition(v);
-                final ToDo item = todoList.get(itemPosition);
+
+
                 AlertDialog.Builder builder;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     builder = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_Material_Dialog_Alert);
@@ -68,9 +68,8 @@ public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapte
                                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                 DatabaseReference database = FirebaseDatabase.getInstance().getReference("todoList").child(uid);
 
-                                database.child(item.getUid()).removeValue();
-                                //database.child(item.getDate()).removeValue();
-                               // database.child(item.getDate()).removeValue();
+                                database.child(todo.getUid()).removeValue();
+
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -88,9 +87,14 @@ public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapte
 
         public final class SimpleItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             TextView title;
-            public int position;
+            private int position;
             public View v;
-
+            public int getposition(){
+                return position;
+            }
+            public void setPosition(int position){
+                this.position = position;
+            }
             public SimpleItemViewHolder(View itemView) {
                 super(itemView);
                 itemView.setOnClickListener(this);
