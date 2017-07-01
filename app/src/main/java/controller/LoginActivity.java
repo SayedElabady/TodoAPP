@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     @BindView(R.id.emailEditText) EditText email;
     @BindView(R.id.passwordEditText) EditText password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +43,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-
-                                Toast.makeText(LoginActivity.this, "Signed In Successfully.. 3eesh ;) .",
-                                        Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, ToDoActivity.class);
                                 startActivity(intent);
 

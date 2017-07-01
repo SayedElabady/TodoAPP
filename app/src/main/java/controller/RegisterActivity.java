@@ -44,14 +44,14 @@ public class RegisterActivity extends AppCompatActivity implements TodoRegisterL
     public void completeRegister(View view){
         email1 = email.getText().toString() ;
         Password1 = firstPassword.getText().toString();
-        toDoUserRegister.RegisteringUserIntoDB(email1 , Password1 ,todoRegisterListener, this);
+        toDoUserRegister.RegisterUser(email1 , Password1 , todoRegisterListener);
     }
 
 
 
     @Override
     public void onSuccess() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = mAuth.getCurrentUser();
         user.sendEmailVerification();
 
         Toast.makeText(RegisterActivity.this, "User Registered..Verifty your email to be able to login",

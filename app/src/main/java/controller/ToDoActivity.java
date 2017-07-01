@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.sayed.todoapp.R;
@@ -41,7 +42,8 @@ public class ToDoActivity extends AppCompatActivity implements TodoLoadListener 
         setContentView(R.layout.activity_to_do);
 
         ButterKnife.bind(this);
-
+        Toast.makeText(ToDoActivity.this, "Page is Loading....",
+                Toast.LENGTH_SHORT).show();
         //bind the adapter to the recyclerview
         LinearLayoutManager llm = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(llm);

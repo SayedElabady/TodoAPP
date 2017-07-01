@@ -13,6 +13,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sayed.todoapp.R;
+
+import listener.TodoLoadListener;
 import model.ToDo;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 
 public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapter.SimpleItemViewHolder> {
     ArrayList<ToDo> todoList;
-
+    TodoLoadListener todoLoadListener;
         public ToDoRecyclerAdapter(){
             todoList = new ArrayList<>();
         }
@@ -78,6 +80,7 @@ public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapte
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
+               // todoLoadListener.onDataLoaded(getList());
                 return true;
             }
         });
@@ -89,9 +92,7 @@ public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapte
             TextView title;
             private int position;
             public View v;
-            public int getposition(){
-                return position;
-            }
+
             public void setPosition(int position){
                 this.position = position;
             }
