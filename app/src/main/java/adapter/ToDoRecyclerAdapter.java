@@ -2,6 +2,7 @@ package adapter;
 
 import android.content.DialogInterface;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,12 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sayed.todoapp.R;
 
 import listener.TodoLoadListener;
+import listener.onItemInteractionListener;
 import model.ToDo;
 
 import java.util.ArrayList;
@@ -25,6 +30,7 @@ import java.util.ArrayList;
 public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapter.SimpleItemViewHolder> {
     ArrayList<ToDo> todoList;
     TodoLoadListener todoLoadListener;
+    onItemInteractionListener onItemInteractionListener;
         public ToDoRecyclerAdapter(){
             todoList = new ArrayList<>();
         }
@@ -52,6 +58,7 @@ public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapte
         holder.setPosition(position);
         final ToDo todo = todoList.get(position);
         (holder).title.setText(todo.getName());
+
         holder.v.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -68,9 +75,8 @@ public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapte
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                DatabaseReference database = FirebaseDatabase.getInstance().getReference("todoList").child(uid);
+                                onItemInteractionListener.onDeleteItem(uid , todo.getUid());
 
-                                database.child(todo.getUid()).removeValue();
 
                             }
                         })
@@ -84,6 +90,7 @@ public class ToDoRecyclerAdapter extends RecyclerView.Adapter<ToDoRecyclerAdapte
                 return true;
             }
         });
+
     }
 
 

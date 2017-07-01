@@ -12,9 +12,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.sayed.todoapp.R;
 
 import butterknife.BindView;
+import listener.onItemInteractionListener;
 import model.ToDo;
 import adapter.ToDoRecyclerAdapter;
 import listener.TodoLoadListener;
@@ -25,7 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import module.ToDoDataBase;
 
-public class ToDoActivity extends AppCompatActivity implements TodoLoadListener {
+public class ToDoActivity extends AppCompatActivity implements TodoLoadListener, onItemInteractionListener {
     ToDoRecyclerAdapter adapter;
     ToDoDataBase toDoDataBase;
 
@@ -82,4 +85,11 @@ public class ToDoActivity extends AppCompatActivity implements TodoLoadListener 
     }
 
 
+    @Override
+    public void onDeleteItem(String ID , String Uid) {
+
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("todoList").child(ID);
+
+        database.child(Uid).removeValue();
+    }
 }
